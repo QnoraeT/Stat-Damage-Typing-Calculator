@@ -321,12 +321,13 @@ function loadScripts() {
     document.getElementById('hpDmgPkmn').style.display = "none"
 }
 
-function calcMine(atk, def, pow, modif) {
+function calcMine(atk, baseAtk, def, pow, modif) {
     atk = Number(atk)
     def = Number(def)
     pow = Number(pow)
     modif = Number(modif)
-    return (atk ** 3)/((atk + def) ** 2) * modif * pow
+    // return (atk ** 3)/((atk + def) ** 2) * modif * pow
+    return (modif * pow * baseAtk * atk / def) / 4
 }
 
 function calcPkmn(lv, atk, def, pow, modif) {
@@ -348,12 +349,12 @@ function calculateDamage() {
         }
         dmg *= Number(document.getElementById('amisc').value)
         factors.push(`Misc: x${document.getElementById('amisc').value}`)
-        dmg *= getTypeEffective(document.getElementById('atype').value.replace(/\s/g, '').split(","), document.getElementById('vtype').value.replace(/\s/g, '').split(","))
-        factors.push(`Type Effectiveness: x${getTypeEffective(document.getElementById('atype').value.replace(/\s/g, '').split(","), document.getElementById('vtype').value.replace(/\s/g, '').split(","))}`)
-        let mydmg = calcMine(document.getElementById('aatk').value, document.getElementById('vdef').value, document.getElementById('apow').value/100, dmg)
-        document.getElementById('mySystemDmg').innerText = `My system: ${Math.ceil(mydmg)} damage, ${Math.floor(Number(document.getElementById('vhp').value)-mydmg)} HP remains, ${Math.ceil(mydmg / Number(document.getElementById('vhp').value)*1000)/10}% damage`
-        let pkmndmg = calcPkmn(document.getElementById('alevel').value, document.getElementById('aatk').value, document.getElementById('vdef').value, document.getElementById('apow').value, dmg)
-        document.getElementById('pkmnSystemDmg').innerText = `Pokemon's system: ${Math.ceil(pkmndmg*0.85)}-${Math.ceil(pkmndmg)} damage, ${Math.max(0, Math.floor(Number(document.getElementById('vhp').value)-pkmndmg))}-${Math.max(0, Math.floor(Number(document.getElementById('vhp').value)-(pkmndmg*0.85)))} HP remains, ${Math.ceil(0.85 * pkmndmg / Number(document.getElementById('vhp').value)*1000)/10}-${Math.ceil(pkmndmg / Number(document.getElementById('vhp').value)*1000)/10}% damage`
+        dmg *= getTypeEffective(document.getElementById('atype').value.replace(/\s/g, '').split(","), document.getElementById('tartype').value.replace(/\s/g, '').split(","))
+        factors.push(`Type Effectiveness: x${getTypeEffective(document.getElementById('atype').value.replace(/\s/g, '').split(","), document.getElementById('tartype').value.replace(/\s/g, '').split(","))}`)
+        let mydmg = calcMine(document.getElementById('aatk').value, document.getElementById('aatkm').value * document.getElementById('aatk').value, document.getElementById('tardef').value, document.getElementById('apow').value/100, dmg)
+        document.getElementById('mySystemDmg').innerText = `My system: ${Math.ceil(mydmg)} damage, ${Math.floor(Number(document.getElementById('tarhp').value)-mydmg)} HP remains, ${Math.ceil(mydmg / Number(document.getElementById('tarhp').value)*1000)/10}% damage`
+        let pkmndmg = calcPkmn(document.getElementById('alevel').value, document.getElementById('aatk').value, document.getElementById('tardef').value, document.getElementById('apow').value, dmg)
+        document.getElementById('pkmnSystemDmg').innerText = `Pokemon's system: ${Math.ceil(pkmndmg*0.85)}-${Math.ceil(pkmndmg)} damage, ${Math.max(0, Math.floor(Number(document.getElementById('tarhp').value)-pkmndmg))}-${Math.max(0, Math.floor(Number(document.getElementById('tarhp').value)-(pkmndmg*0.85)))} HP remains, ${Math.ceil(0.85 * pkmndmg / Number(document.getElementById('tarhp').value)*1000)/10}-${Math.ceil(pkmndmg / Number(document.getElementById('tarhp').value)*1000)/10}% damage`
     
         let txt = ``
         for (let i = 0; i < factors.length; i++) {
@@ -362,14 +363,14 @@ function calculateDamage() {
         document.getElementById('factors').innerText = txt
 
         document.getElementById('hpDmgMine').style.display = ""
-        document.getElementById('hpDamageMineFill').style.width = `${(Math.max(0, 1 - mydmg / Number(document.getElementById('vhp').value))*100)}%`
-        document.getElementById('hpDamageMineBase').style['background-color'] = gRC(Math.max(0, 2.0 * (1 - mydmg / Number(document.getElementById('vhp').value))), 0.25, 1.0)
-        document.getElementById('hpDamageMineFill').style['background-color'] = gRC(Math.max(0, 2.0 * (1 - mydmg / Number(document.getElementById('vhp').value))), 1.0, 1.0)
+        document.getElementById('hpDamageMineFill').style.width = `${(Math.max(0, 1 - mydmg / Number(document.getElementById('tarhp').value))*100)}%`
+        document.getElementById('hpDamageMineBase').style['background-color'] = gRC(Math.max(0, 2.0 * (1 - mydmg / Number(document.getElementById('tarhp').value))), 0.25, 1.0)
+        document.getElementById('hpDamageMineFill').style['background-color'] = gRC(Math.max(0, 2.0 * (1 - mydmg / Number(document.getElementById('tarhp').value))), 1.0, 1.0)
 
         document.getElementById('hpDmgPkmn').style.display = ""
-        document.getElementById('hpDamagePkmnFill').style.width = `${(Math.max(0, 1 - pkmndmg / Number(document.getElementById('vhp').value))*100)}%`
-        document.getElementById('hpDamagePkmnBase').style['background-color'] = gRC(Math.max(0, 2.0 * (1 - pkmndmg / Number(document.getElementById('vhp').value))), 0.25, 1.0)
-        document.getElementById('hpDamagePkmnFill').style['background-color'] = gRC(Math.max(0, 2.0 * (1 - pkmndmg / Number(document.getElementById('vhp').value))), 1.0, 1.0)
+        document.getElementById('hpDamagePkmnFill').style.width = `${(Math.max(0, 1 - pkmndmg / Number(document.getElementById('tarhp').value))*100)}%`
+        document.getElementById('hpDamagePkmnBase').style['background-color'] = gRC(Math.max(0, 2.0 * (1 - pkmndmg / Number(document.getElementById('tarhp').value))), 0.25, 1.0)
+        document.getElementById('hpDamagePkmnFill').style['background-color'] = gRC(Math.max(0, 2.0 * (1 - pkmndmg / Number(document.getElementById('tarhp').value))), 1.0, 1.0)
     } catch {
         document.getElementById('mySystemDmg').innerText = `Something went wrong! Check your typing inputs and try again.`
     }

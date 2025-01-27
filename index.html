@@ -20,8 +20,10 @@
         </button>
         <div id="damageCalc" style="font-family: Verdana, Geneva, Tahoma, sans-serif; color: #fff">
             <span>Warning: You must spell the typing exactly! You must also split each type with a comma!<br>Available Types: <span id="typeList"></span></span><br><br>
-            <label for="aatk">Attacking character's ATK:</label>
+            <label for="aatk">Attacking character's Base ATK:</label>
             <input type="text" id="aatk" name="aatk"><br>
+            <label for="aatkm">Attacking character's ATK multiplier:</label>
+            <input type="text" id="aatkm" name="aatkm"><br>
             <label for="alevel">Attacking character's Level:</label>
             <input type="text" id="alevel" name="alevel"><br>
             <label for="apow">Attacking character's Base Power:</label>
@@ -33,12 +35,12 @@
             <label for="amisc">Attacking character's Other Modifiers (Abilities, Move Effects, etc):</label>
             <input type="text" id="amisc" name="amisc"><br>
             <br>
-            <label for="vhp">Victim character's HP:</label>
-            <input type="text" id="vhp" name="vhp"><br>
-            <label for="vdef">Victim character's DEF:</label>
-            <input type="text" id="vdef" name="vdef"><br>
-            <label for="vtype">Victim character's Typing:</label>
-            <input type="text" id="vtype" name="vtype"><br>
+            <label for="tarhp">Target character's HP:</label>
+            <input type="text" id="tarhp" name="tarhp"><br>
+            <label for="tardef">Target character's DEF:</label>
+            <input type="text" id="tardef" name="tardef"><br>
+            <label for="tartype">Target character's Typing:</label>
+            <input type="text" id="tartype" name="tartype"><br>
             <button onclick="calculateDamage()" style="color: #fff; background-color: #444; border: 2.2px solid #fff; font-family: Verdana; cursor: pointer">
                 Calculate Damage!
             </button>
