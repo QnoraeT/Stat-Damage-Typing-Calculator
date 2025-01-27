@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>calculations</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="styles.css" rel="stylesheet" type="text/css">
+
+        <script src="src/ok.js"></script>
+    </head>
+    <body onload="loadScripts()" style="background-color: #000;">
+        <button onclick="switchTab(0)" style="color: #fff; background-color: #444; border: 2.2px solid #fff; font-family: Verdana; cursor: pointer">
+            Damage Calculator
+        </button>
+        <button onclick="switchTab(1)" style="color: #fff; background-color: #444; border: 2.2px solid #fff; font-family: Verdana; cursor: pointer">
+            Stat Calculator
+        </button>
+        <button onclick="switchTab(2)" style="color: #fff; background-color: #444; border: 2.2px solid #fff; font-family: Verdana; cursor: pointer">
+            Typing Calculator
+        </button>
+        <div id="damageCalc" style="font-family: Verdana, Geneva, Tahoma, sans-serif; color: #fff">
+            <span>Warning: You must spell the typing exactly! You must also split each type with a comma!<br>Available Types: <span id="typeList"></span></span><br><br>
+            <label for="aatk">Attacking character's ATK:</label>
+            <input type="text" id="aatk" name="aatk"><br>
+            <label for="alevel">Attacking character's Level:</label>
+            <input type="text" id="alevel" name="alevel"><br>
+            <label for="apow">Attacking character's Base Power:</label>
+            <input type="text" id="apow" name="apow"><br>
+            <label for="atype">Attacking character's Typing:</label>
+            <input type="text" id="atype" name="atype"><br>
+            <label for="acrit">Attacking character's Critical:</label>
+            <input type="checkbox" id="acrit"><br>
+            <label for="amisc">Attacking character's Other Modifiers (Abilities, Move Effects, etc):</label>
+            <input type="text" id="amisc" name="amisc"><br>
+            <br>
+            <label for="vhp">Victim character's HP:</label>
+            <input type="text" id="vhp" name="vhp"><br>
+            <label for="vdef">Victim character's DEF:</label>
+            <input type="text" id="vdef" name="vdef"><br>
+            <label for="vtype">Victim character's Typing:</label>
+            <input type="text" id="vtype" name="vtype"><br>
+            <button onclick="calculateDamage()" style="color: #fff; background-color: #444; border: 2.2px solid #fff; font-family: Verdana; cursor: pointer">
+                Calculate Damage!
+            </button>
+            <br><br>
+            <span id="mySystemDmg"></span><br>
+            <div id="hpDmgMine" style="height: 12px; width: 300px; position: relative;">
+                <div id="hpDamageMineBase" style="position: absolute; top: 0; left: 0; height: 100%; width: 100%;"></div>
+                <div id="hpDamageMineFill" style="position: absolute; top: 0; left: 0; height: 100%"></div>
+            </div>
+            <br>
+            <span id="pkmnSystemDmg"></span><br>
+            <div id="hpDmgPkmn" style="height: 12px; width: 300px; position: relative;">
+                <div id="hpDamagePkmnBase" style="position: absolute; top: 0; left: 0; height: 100%; width: 100%;"></div>
+                <div id="hpDamagePkmnFill" style="position: absolute; top: 0; left: 0; height: 100%"></div>
+            </div>
+            <br>
+            <span id="factors"></span><br>
+        </div>
+        <div id="statCalc" style="font-family: Verdana, Geneva, Tahoma, sans-serif; color: #fff">
+            <span>Input base stats here! Blanks = 0</span><br><br>
+            <div id="baseStatList"></div>
+            <br>
+            <label for="cstat">Stat table?</label>
+            <select name="cstat" id="cstat">
+                <option value="pkmng">Pokemon (Gen 1-2)</option>
+                <option value="pkmn">Pokemon</option>
+                <option value="t1">TearonQ v1 (0-100 BST)</option>
+                <option value="t2">TearonQ v2 (0-600 BST)</option>
+                <option value="t3">TearonQ v3 (0-600 BST)</option>
+                <option value="t4">TearonQ v4 (0-2,500 BST)</option>
+            </select><br>
+            <label for="cnat">Nature</label>
+            <select name="cnat" id="cnat"></select><br>
+            <label for="clevel">Character Level:</label>
+            <input type="text" id="clevel" name="clevel"><br>
+            <button onclick="calculateStat()" style="color: #fff; background-color: #444; border: 2.2px solid #fff; font-family: Verdana; cursor: pointer">
+                Calculate Stats!
+            </button><br>
+            <br>
+            <span id="callstats"></span><br>
+            <div id="cstatsgraph">
+                <!-- <div id="hpDmgMine" style="height: 12px; width: 300px; position: relative;">
+                    <div id="hpDamageMineBase" style="position: absolute; top: 0; left: 0; height: 100%; width: 100%;"></div>
+                    <div id="hpDamageMineFill" style="position: absolute; top: 0; left: 0; height: 100%"></div>
+                </div> -->
+            </div>
+        </div>
+        <div id="typeCalc" style="font-family: Verdana, Geneva, Tahoma, sans-serif; color: #fff">
+            <span>Warning: You must spell the typing exactly! You must also split each type with a comma!<br>Available Types: <span id="typeList2"></span></span><br><br>
+            <label for="ttype">Typing:</label>
+            <input type="text" id="ttype" name="ttype"><br>
+            <button onclick="calculateType(0)" style="color: #fff; background-color: #444; border: 2.2px solid #fff; font-family: Verdana; cursor: pointer">
+                Calculate all attacking types!
+            </button>
+            <button onclick="calculateType(1)" style="color: #fff; background-color: #444; border: 2.2px solid #fff; font-family: Verdana; cursor: pointer">
+                Calculate all defending types!
+            </button>
+            <br><br>
+            <span id="typecalcc"></span><br>
+        </div>
+    </body>
+</html>
