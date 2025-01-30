@@ -1,5 +1,9 @@
 "use strict";
 
+function capitalizeFirstLetter(val) {
+    return String(val).charAt(0).toUpperCase() + String(val).slice(1);
+}
+
 function gRC(time, val, sat) {
     const s = Math.floor(time) % 6;
     const t = time % 1;
@@ -75,128 +79,128 @@ function mixColor(color, nextColor, time) {
 };
 
 const ELEMENTS = {
-    Typeless: "Typeless",
-    Normal: "Normal",
-    Fire: "Fire",
-    Water: "Water",
-    Electric: "Electric",
-    Grass: "Grass",
-    Ice: "Ice",
-    Fighting: "Fighting",
-    Poison: "Poison",
-    Ground: "Ground",
-    Flying: "Flying",
-    Psychic: "Psychic",
-    Bug: "Bug",
-    Rock: "Rock",
-    Ghost: "Ghost",
-    Dragon: "Dragon",
-    Dark: "Dark",
-    Steel: "Steel",
-    Fairy: "Fairy",
-    Digital: "Digital",
-    CylleneIce: "CylleneIce"
+    typeless: "typeless",
+    normal: "normal",
+    fire: "fire",
+    water: "water",
+    electric: "electric",
+    grass: "grass",
+    ice: "ice",
+    fighting: "fighting",
+    poison: "poison",
+    ground: "ground",
+    flying: "flying",
+    psychic: "psychic",
+    bug: "bug",
+    rock: "rock",
+    ghost: "ghost",
+    dragon: "dragon",
+    dark: "dark",
+    steel: "steel",
+    fairy: "fairy",
+    digital: "digital",
+    cyllene_ice: "cyllene_ice"
 }
 
 let possibleTypeDmg = [0, 0.5, 0.7, 1.4, 2, 4]
 
-const TYPE_LIST = [ELEMENTS.Typeless, ELEMENTS.Normal, ELEMENTS.Fire, ELEMENTS.Water, ELEMENTS.Electric, ELEMENTS.Grass, ELEMENTS.Ice, ELEMENTS.Fighting, ELEMENTS.Poison, ELEMENTS.Ground, ELEMENTS.Flying, ELEMENTS.Psychic, ELEMENTS.Bug, ELEMENTS.Rock, ELEMENTS.Ghost, ELEMENTS.Dragon, ELEMENTS.Dark, ELEMENTS.Steel, ELEMENTS.Fairy, ELEMENTS.Digital, ELEMENTS.CylleneIce]
+const TYPE_LIST = [ELEMENTS.typeless, ELEMENTS.normal, ELEMENTS.fire, ELEMENTS.water, ELEMENTS.electric, ELEMENTS.grass, ELEMENTS.ice, ELEMENTS.fighting, ELEMENTS.poison, ELEMENTS.ground, ELEMENTS.flying, ELEMENTS.psychic, ELEMENTS.bug, ELEMENTS.rock, ELEMENTS.ghost, ELEMENTS.dragon, ELEMENTS.dark, ELEMENTS.steel, ELEMENTS.fairy, ELEMENTS.digital, ELEMENTS.cyllene_ice]
 
 const typeEff = {
-    Normal: {
-        0: [ELEMENTS.Ghost],
-        0.5: [ELEMENTS.Rock, ELEMENTS.Steel]
+    normal: {
+        0: [ELEMENTS.ghost],
+        0.5: [ELEMENTS.rock, ELEMENTS.steel]
     },
-    Fire: {
-        0.5: [ELEMENTS.Fire, ELEMENTS.Water, ELEMENTS.Rock, ELEMENTS.Dragon],
-        2: [ELEMENTS.Grass, ELEMENTS.Ice, ELEMENTS.Bug, ELEMENTS.Steel, ELEMENTS.Digital],
+    fire: {
+        0.5: [ELEMENTS.fire, ELEMENTS.water, ELEMENTS.rock, ELEMENTS.dragon],
+        2: [ELEMENTS.grass, ELEMENTS.ice, ELEMENTS.bug, ELEMENTS.steel, ELEMENTS.digital],
     },
-    Water: {
-        0.5: [ELEMENTS.Water, ELEMENTS.Grass, ELEMENTS.Dragon],
-        0.7: [ELEMENTS.CylleneIce],
-        2: [ELEMENTS.Fire, ELEMENTS.Ground, ELEMENTS.Rock, ELEMENTS.Digital],
+    water: {
+        0.5: [ELEMENTS.water, ELEMENTS.grass, ELEMENTS.dragon],
+        0.7: [ELEMENTS.cyllene_ice],
+        2: [ELEMENTS.fire, ELEMENTS.ground, ELEMENTS.rock, ELEMENTS.digital],
     },
-    Electric: {
-        0: [ELEMENTS.Ground],
-        0.5: [ELEMENTS.Electric, ELEMENTS.Grass, ELEMENTS.Dragon],
-        2: [ELEMENTS.Water, ELEMENTS.Flying],
+    electric: {
+        0: [ELEMENTS.ground],
+        0.5: [ELEMENTS.electric, ELEMENTS.grass, ELEMENTS.dragon],
+        2: [ELEMENTS.water, ELEMENTS.flying],
     },
-    Grass: {
-        0.5: [ELEMENTS.Fire, ELEMENTS.Grass, ELEMENTS.Poison, ELEMENTS.Flying, ELEMENTS.Bug, ELEMENTS.Dragon, ELEMENTS.Steel],
-        2: [ELEMENTS.Water, ELEMENTS.Ground, ELEMENTS.Rock],
+    grass: {
+        0.5: [ELEMENTS.fire, ELEMENTS.grass, ELEMENTS.poison, ELEMENTS.flying, ELEMENTS.bug, ELEMENTS.dragon, ELEMENTS.steel],
+        2: [ELEMENTS.water, ELEMENTS.ground, ELEMENTS.rock],
     },
-    Ice: {
-        0.5: [ELEMENTS.Fire, ELEMENTS.Water, ELEMENTS.Ice, ELEMENTS.Steel],
-        0.7: [ELEMENTS.CylleneIce],
-        2: [ELEMENTS.Grass, ELEMENTS.Ground, ELEMENTS.Flying, ELEMENTS.Dragon],
+    ice: {
+        0.5: [ELEMENTS.fire, ELEMENTS.water, ELEMENTS.ice, ELEMENTS.steel],
+        0.7: [ELEMENTS.cyllene_ice],
+        2: [ELEMENTS.grass, ELEMENTS.ground, ELEMENTS.flying, ELEMENTS.dragon],
     },
-    Fighting: {
-        0: [ELEMENTS.Ghost],
-        0.5: [ELEMENTS.Poison, ELEMENTS.Flying, ELEMENTS.Psychic, ELEMENTS.Bug, ELEMENTS.Fairy, ELEMENTS.Digital],
-        1.4: [ELEMENTS.CylleneIce],
-        2: [ELEMENTS.Normal, ELEMENTS.Ice, ELEMENTS.Rock, ELEMENTS.Dark, ELEMENTS.Steel],
+    fighting: {
+        0: [ELEMENTS.ghost],
+        0.5: [ELEMENTS.poison, ELEMENTS.flying, ELEMENTS.psychic, ELEMENTS.bug, ELEMENTS.fairy, ELEMENTS.digital],
+        1.4: [ELEMENTS.cyllene_ice],
+        2: [ELEMENTS.normal, ELEMENTS.ice, ELEMENTS.rock, ELEMENTS.dark, ELEMENTS.steel],
     },
-    Poison: {
-        0: [ELEMENTS.Steel, ELEMENTS.Digital],
-        0.5: [ELEMENTS.Poison, ELEMENTS.Ground, ELEMENTS.Rock, ELEMENTS.Ghost],
-        2: [ELEMENTS.Grass, ELEMENTS.Fairy],
+    poison: {
+        0: [ELEMENTS.steel, ELEMENTS.digital],
+        0.5: [ELEMENTS.poison, ELEMENTS.ground, ELEMENTS.rock, ELEMENTS.ghost],
+        2: [ELEMENTS.grass, ELEMENTS.fairy],
     },
-    Ground: {
-        0: [ELEMENTS.Flying],
-        0.5: [ELEMENTS.Grass, ELEMENTS.Bug],
-        2: [ELEMENTS.Fire, ELEMENTS.Electric, ELEMENTS.Poison, ELEMENTS.Rock, ELEMENTS.Steel],
+    ground: {
+        0: [ELEMENTS.flying],
+        0.5: [ELEMENTS.grass, ELEMENTS.bug],
+        2: [ELEMENTS.fire, ELEMENTS.electric, ELEMENTS.poison, ELEMENTS.rock, ELEMENTS.steel],
     },
-    Flying: {
-        0.5: [ELEMENTS.Electric, ELEMENTS.Rock, ELEMENTS.Steel],
-        2: [ELEMENTS.Grass, ELEMENTS.Fighting, ELEMENTS.Bug],
+    flying: {
+        0.5: [ELEMENTS.electric, ELEMENTS.rock, ELEMENTS.steel],
+        2: [ELEMENTS.grass, ELEMENTS.fighting, ELEMENTS.bug],
     },
-    Psychic: {
-        0: [ELEMENTS.Dark],
-        0.5: [ELEMENTS.Psychic, ELEMENTS.Steel],
-        2: [ELEMENTS.Fighting, ELEMENTS.Poison],
+    psychic: {
+        0: [ELEMENTS.dark],
+        0.5: [ELEMENTS.psychic, ELEMENTS.steel],
+        2: [ELEMENTS.fighting, ELEMENTS.poison],
     },
-    Bug: {
-        0.5: [ELEMENTS.Fire, ELEMENTS.Fighting, ELEMENTS.Poison, ELEMENTS.Flying, ELEMENTS.Ghost, ELEMENTS.Steel, ELEMENTS.Fairy],
-        2: [ELEMENTS.Grass, ELEMENTS.Psychic, ELEMENTS.Dark],
-        4: [ELEMENTS.Digital],
+    bug: {
+        0.5: [ELEMENTS.fire, ELEMENTS.fighting, ELEMENTS.poison, ELEMENTS.flying, ELEMENTS.ghost, ELEMENTS.steel, ELEMENTS.fairy],
+        2: [ELEMENTS.grass, ELEMENTS.psychic, ELEMENTS.dark],
+        4: [ELEMENTS.digital],
     },
-    Rock: {
-        0.5: [ELEMENTS.Fighting, ELEMENTS.Ground, ELEMENTS.Steel],
-        2: [ELEMENTS.Fire, ELEMENTS.Ice, ELEMENTS.Flying, ELEMENTS.Bug],
+    rock: {
+        0.5: [ELEMENTS.fighting, ELEMENTS.ground, ELEMENTS.steel],
+        2: [ELEMENTS.fire, ELEMENTS.ice, ELEMENTS.flying, ELEMENTS.bug],
     },
-    Ghost: {
-        0: [ELEMENTS.Normal],
-        0.5: [ELEMENTS.Dark],
-        2: [ELEMENTS.Psychic, ELEMENTS.Ghost, ELEMENTS.Digital],
+    ghost: {
+        0: [ELEMENTS.normal],
+        0.5: [ELEMENTS.dark],
+        2: [ELEMENTS.psychic, ELEMENTS.ghost, ELEMENTS.digital],
     },
-    Dragon: {
-        0: [ELEMENTS.Fairy],
-        0.5: [ELEMENTS.Steel],
-        2: [ELEMENTS.Dragon],
+    dragon: {
+        0: [ELEMENTS.fairy],
+        0.5: [ELEMENTS.steel],
+        2: [ELEMENTS.dragon],
     },
-    Dark: {
-        0.5: [ELEMENTS.Fighting, ELEMENTS.Dark, ELEMENTS.Fairy, ELEMENTS.Digital],
-        2: [ELEMENTS.Psychic, ELEMENTS.Ghost],
+    dark: {
+        0.5: [ELEMENTS.fighting, ELEMENTS.dark, ELEMENTS.fairy, ELEMENTS.digital],
+        2: [ELEMENTS.psychic, ELEMENTS.ghost],
     },
-    Steel: {
-        0.5: [ELEMENTS.Fire, ELEMENTS.Water, ELEMENTS.Electric, ELEMENTS.Steel],
-        1.4: [ELEMENTS.CylleneIce],
-        2: [ELEMENTS.Ice, ELEMENTS.Rock, ELEMENTS.Fairy],
+    steel: {
+        0.5: [ELEMENTS.fire, ELEMENTS.water, ELEMENTS.electric, ELEMENTS.steel],
+        1.4: [ELEMENTS.cyllene_ice],
+        2: [ELEMENTS.ice, ELEMENTS.rock, ELEMENTS.fairy],
     },
-    Fairy: {
-        0.5: [ELEMENTS.Fire, ELEMENTS.Poison, ELEMENTS.Steel],
-        2: [ELEMENTS.Fighting, ELEMENTS.Dragon, ELEMENTS.Dark],
+    fairy: {
+        0.5: [ELEMENTS.fire, ELEMENTS.poison, ELEMENTS.steel],
+        2: [ELEMENTS.fighting, ELEMENTS.dragon, ELEMENTS.dark],
     },
-    Digital: {
-        0.5: [ELEMENTS.Ice, ELEMENTS.Ground, ELEMENTS.Rock, ELEMENTS.Fairy],
-        0.7: [ELEMENTS.CylleneIce],
-        2: [ELEMENTS.Electric, ELEMENTS.Fighting, ELEMENTS.Flying, ELEMENTS.Psychic, ELEMENTS.Ghost, ELEMENTS.Dragon, ELEMENTS.Digital],
+    digital: {
+        0.5: [ELEMENTS.ice, ELEMENTS.ground, ELEMENTS.rock, ELEMENTS.fairy],
+        0.7: [ELEMENTS.cyllene_ice],
+        2: [ELEMENTS.electric, ELEMENTS.fighting, ELEMENTS.flying, ELEMENTS.psychic, ELEMENTS.ghost, ELEMENTS.dragon, ELEMENTS.digital],
     },
-    CylleneIce: {
-        0.7: [ELEMENTS.Water, ELEMENTS.Ice, ELEMENTS.CylleneIce, ELEMENTS.Steel],
-        1.4: [ELEMENTS.Grass, ELEMENTS.Ground, ELEMENTS.Flying, ELEMENTS.Dragon],
+    cyllene_ice: {
+        0.7: [ELEMENTS.water, ELEMENTS.ice, ELEMENTS.cyllene_ice, ELEMENTS.steel],
+        1.4: [ELEMENTS.grass, ELEMENTS.ground, ELEMENTS.flying, ELEMENTS.dragon],
     },
-    Typeless: {
+    typeless: {
         1: []
     }
 }
@@ -274,9 +278,9 @@ function checkEveryTypeDefTxt(defending) {
 function getTypeText() {
     let txt = "";
     for (let i = 0; i < TYPE_LIST.length - 1; i++) {
-        txt += `${TYPE_LIST[i]}, `
+        txt += `${capitalizeFirstLetter(TYPE_LIST[i])}, `
     }
-    txt += TYPE_LIST[TYPE_LIST.length - 1]
+    txt += capitalizeFirstLetter(TYPE_LIST[TYPE_LIST.length - 1])
     return txt
 }
 
@@ -349,8 +353,8 @@ function calculateDamage() {
         }
         dmg *= Number(document.getElementById('amisc').value)
         factors.push(`Misc: x${document.getElementById('amisc').value}`)
-        dmg *= getTypeEffective(document.getElementById('atype').value.replace(/\s/g, '').split(","), document.getElementById('tartype').value.replace(/\s/g, '').split(","))
-        factors.push(`Type Effectiveness: x${getTypeEffective(document.getElementById('atype').value.replace(/\s/g, '').split(","), document.getElementById('tartype').value.replace(/\s/g, '').split(","))}`)
+        dmg *= getTypeEffective(document.getElementById('atype').value.toLowerCase().replace(/\s/g, '').split(","), document.getElementById('tartype').value.toLowerCase().replace(/\s/g, '').split(","))
+        factors.push(`Type Effectiveness: x${getTypeEffective(document.getElementById('atype').value.toLowerCase().replace(/\s/g, '').split(","), document.getElementById('tartype').value.toLowerCase().replace(/\s/g, '').split(","))}`)
         let mydmg = calcMine(document.getElementById('aatk').value, document.getElementById('aatkm').value, document.getElementById('tardef').value, document.getElementById('apow').value/100, dmg)
         document.getElementById('mySystemDmg').innerText = `My system: ${Math.ceil(mydmg)} damage, ${Math.floor(Number(document.getElementById('tarhp').value)-mydmg)} HP remains, ${Math.ceil(mydmg / Number(document.getElementById('tarhp').value)*1000)/10}% damage`
         let pkmndmg = calcPkmn(document.getElementById('alevel').value, document.getElementById('aatkm').value, document.getElementById('tardef').value, document.getElementById('apow').value, dmg)
@@ -483,13 +487,13 @@ function calculateType(f) {
     try {
         let txt2 = ``
         if (f === 0) {
-            let txt = checkEveryTypeDefTxt(document.getElementById('ttype').value.replace(/\s/g, '').split(","))
+            let txt = checkEveryTypeDefTxt(document.getElementById('ttype').value.toLowerCase().replace(/\s/g, '').split(","))
             for (let i = 0; i < txt.length; i++) {
                 txt2 += `<span style="color: ${txt[i].color}">${txt[i].txt}</span><br>`
             }
         }
         if (f === 1) {
-            let txt = checkEveryTypeAtkTxt(document.getElementById('ttype').value.replace(/\s/g, '').split(","))
+            let txt = checkEveryTypeAtkTxt(document.getElementById('ttype').value.toLowerCase().replace(/\s/g, '').split(","))
             for (let i = 0; i < txt.length; i++) {
                 txt2 += `<span style="color: ${txt[i].color}">${txt[i].txt}</span><br>`
             }
