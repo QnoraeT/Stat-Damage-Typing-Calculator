@@ -136,7 +136,7 @@ const typeEff = {
     },
     fighting: {
         0: [ELEMENTS.ghost],
-        0.5: [ELEMENTS.poison, ELEMENTS.flying, ELEMENTS.psychic, ELEMENTS.bug, ELEMENTS.fairy, ELEMENTS.digital],
+        0.5: [ELEMENTS.poison, ELEMENTS.flying, ELEMENTS.psychic, ELEMENTS.bug, ELEMENTS.fairy],
         1.4: [ELEMENTS.cyllene_ice],
         2: [ELEMENTS.normal, ELEMENTS.ice, ELEMENTS.rock, ELEMENTS.dark, ELEMENTS.steel],
     },
@@ -147,11 +147,11 @@ const typeEff = {
     },
     ground: {
         0: [ELEMENTS.flying],
-        0.5: [ELEMENTS.grass, ELEMENTS.bug],
+        0.5: [ELEMENTS.grass, ELEMENTS.bug, ELEMENTS.digital],
         2: [ELEMENTS.fire, ELEMENTS.electric, ELEMENTS.poison, ELEMENTS.rock, ELEMENTS.steel],
     },
     flying: {
-        0.5: [ELEMENTS.electric, ELEMENTS.rock, ELEMENTS.steel],
+        0.5: [ELEMENTS.electric, ELEMENTS.rock, ELEMENTS.steel, ELEMENTS.digital],
         2: [ELEMENTS.grass, ELEMENTS.fighting, ELEMENTS.bug],
     },
     psychic: {
